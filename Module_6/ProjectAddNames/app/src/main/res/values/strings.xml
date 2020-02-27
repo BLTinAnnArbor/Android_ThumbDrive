@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Project Add Names</string>
+    <string name="name">Name</string>
+    <string name="result">Result</string>
+    <string name="enter_name_here">Enter Name Here</string>
+    <string name="add_name">Add Name</string>
+</resources>
