@@ -25,22 +25,18 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MyFragment";
 
     private MainViewModel mViewModel;
+    private ListView myListView;
     private TextView badInput;
     private EditText nom;
-    //private TextView res;
     private Button addBtn;
-
-
 
     ArrayList<String> listItems = new ArrayList<String>();
     ArrayAdapter<String> adapter;
-    private ListView myListView;
 
     public static MainFragment newInstance() { // returns a new MainFragment instance
         Log.i(TAG, "MainFragment newInstance()");
         return new MainFragment();
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,6 +56,13 @@ public class MainFragment extends Fragment {
 
         myListView.setAdapter(adapter);
 
+        if(mViewModel.nameList.size() > 0){  // If there is something in the view model
+            for(String n : mViewModel.nameList){ // nameList, then loop thru and add the
+                listItems.add(n);                // items to the ListView (current screen).
+            }
+            adapter.notifyDataSetChanged();
+        }
+
         addBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -69,7 +72,7 @@ public class MainFragment extends Fragment {
                     Log.i(TAG, "name isn't blank");
                     mViewModel.setName(nom.getText().toString());
                     addListItem();
-                    //res.setText((mViewModel.getName().toString()));
+                    adapter.notifyDataSetChanged();
                 }else{
                     badInput.setText("You must enter a name.");
                     Log.i(TAG, "must enter a name");
@@ -77,11 +80,13 @@ public class MainFragment extends Fragment {
             }
         });
         return view;
-    }
+
+    } // onCreateView()
+
     private void addListItem(){
-        Log.i(TAG, "in addListItem()");
+        Log.i(TAG, "in mfrag addListItem()");
+        mViewModel.addListItem();
         listItems.add(mViewModel.getName());
-        adapter.notifyDataSetChanged();
     }
 
     @Override
