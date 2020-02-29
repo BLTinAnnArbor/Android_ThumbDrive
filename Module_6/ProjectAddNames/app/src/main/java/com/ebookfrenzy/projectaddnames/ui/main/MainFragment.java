@@ -71,6 +71,7 @@ public class MainFragment extends Fragment {
                 if(!nom.getText().toString().equals("")){
                     Log.i(TAG, "name isn't blank");
                     mViewModel.setName(nom.getText().toString());
+                    badInput.setText(""); // Clears if a valid name is entered.
                     addListItem();
                     adapter.notifyDataSetChanged();
                 }else{
