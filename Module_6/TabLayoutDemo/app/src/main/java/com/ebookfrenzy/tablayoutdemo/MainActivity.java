@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity implements
                 });
 
     }
-/*
+
     @Override
     public void onFragmentInteraction(Uri uri){
     }
 
- */
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ebookfrenzy.navigationdemo.R;
+import com.ebookfrenzy.navigationdemo.SecondFragmentArgs;
 
 public class MainFragment extends Fragment {
 
@@ -42,6 +44,8 @@ public class MainFragment extends Fragment {
 
         //button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.mainToSecond, null));
 
+//  The line above replaces the code below
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -61,5 +65,7 @@ public class MainFragment extends Fragment {
                         //(R.id.mainToSecond); // Resource ID of the navigation action
             }
         });
+
     } // onActivityCreated()
-}
+
+} // class MainFragment

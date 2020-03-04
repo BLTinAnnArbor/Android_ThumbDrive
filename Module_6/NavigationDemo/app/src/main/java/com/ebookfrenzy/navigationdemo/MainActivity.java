@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity
 
         // Deleted the loading of main_fragment.xml
     }
+
     @Override // Necessary for above implementation
     public void onFragmentInteraction(Uri uri){
 

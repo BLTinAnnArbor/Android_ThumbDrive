@@ -35,6 +35,7 @@ public class SecondFragment extends Fragment {
     public SecondFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onStart(){
         super.onStart();
