@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Navigation Project</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="to_fragment_c">To Fragment C</string>
+    <string name="to_fragment_a">To Fragment A</string>
+    <string name="to_fragment_b">To Fragment B</string>
+    <string name="todo">TODO</string>
+    <string name="green_man_7">green man 7</string>
+    <string name="green_man_6">green man 6</string>
+    <string name="green_man_5">green man 5</string>
+    <string name="fragment_a">Fragment A</string>
+    <string name="temp_background">temp background</string>
+
+</resources>
