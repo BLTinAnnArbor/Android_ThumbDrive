@@ -43,7 +43,8 @@
             android:id="@+id/item_hidden_image_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:visibility="visible" />
+            android:visibility="invisible"
+            tools:visibility="gone" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

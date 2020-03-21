@@ -51,7 +51,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     String detailsStr = detailsView.getText().toString();
                     i.putExtra("qDetails", detailsStr);
 
-                    //int imageNum = v.findViewById(R.id. );
+                    TextView imageNumView = v.findViewById(R.id.item_hidden_image_num);
+                    String imageNumStr = imageNumView.getText().toString();
+                    i.putExtra("qImageNum", imageNumStr);
 
                     v.getContext().startActivity(i);
 
