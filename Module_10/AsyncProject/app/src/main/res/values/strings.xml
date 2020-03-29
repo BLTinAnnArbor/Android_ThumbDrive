@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AsyncProject</string>
+    <string name="convert">Convert</string>
+    <string name="add_name">Add Name</string>
+    <string name="clear_names">Clear Names</string>
+    <string name="enter_name">Enter Name</string>
+</resources>
