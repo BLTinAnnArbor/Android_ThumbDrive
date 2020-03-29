@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private String myStr = "Hi there- from onBindViewHolder()";
+    private String[] titles = {"Chapter One",
+            "Chapter Two",
+            "Chapter Three"};
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -21,13 +23,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.itemTitle.setText(myStr);
-
+        viewHolder.itemTitle.setText(titles[i]);
     }
 
     @Override
     public int getItemCount() {
-
+        return titles.length;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -38,6 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(itemView);
             itemTitle = itemView.findViewById(R.id.item_title);
         }
+
     } // class ViewHolder
 
 } // class RecycleAdapter

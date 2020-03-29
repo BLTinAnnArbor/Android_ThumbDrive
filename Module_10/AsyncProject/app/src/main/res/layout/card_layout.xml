@@ -22,7 +22,7 @@
             android:id="@+id/item_title"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp" />
+            android:layout_marginEnd="16dp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
