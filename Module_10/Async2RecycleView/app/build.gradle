@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.ebookfrenzy.asyncrecycleview"
+        applicationId "com.ebookfrenzy.async2recycleview"
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
@@ -24,8 +24,6 @@ android {
 }
 
 dependencies {
-    implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.1.0'

@@ -1,12 +1,10 @@
-package com.ebookfrenzy.asyncrecycleview;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.ebookfrenzy.recycleviewproject;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,34 +12,21 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
 
-    Data d;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 2); // from Google
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
-
-        d = new Data();
-
-    } // onCreate()
-
-    public void addName(View view){
-
-        EditText n = view.findViewById(R.id.nameEditText);
-        String name = n.getText().toString();
-        d.addName(name);
     }
+    // Deleted some Menu stuff
 
-    public void clearNames(View view){
-        d = new Data();
-    }
-
-} // class MainActivity
+}  // MainActivity.java
