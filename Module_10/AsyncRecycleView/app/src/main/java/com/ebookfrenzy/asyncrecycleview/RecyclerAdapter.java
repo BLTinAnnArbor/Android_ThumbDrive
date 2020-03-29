@@ -30,7 +30,7 @@ public class RecyclerAdapter extends RecyclerView.
 
     @Override                            // i is an index into the data arrays
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.nameAndTime.setText(names[i]);
+        viewHolder.nameAndTime.setText(names.get(i));
     }
 
     @Override
