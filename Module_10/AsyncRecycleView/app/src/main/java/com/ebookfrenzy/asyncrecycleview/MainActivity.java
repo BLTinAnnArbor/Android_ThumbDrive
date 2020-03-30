@@ -5,19 +5,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG ="MainActivity";
+
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
-    Data d;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i(TAG, "inside  onCreate()");
+        Data.nameList.clear();
+        Log.i(TAG, "just did Data.nameList.clear() inside onCreate()");
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -28,19 +37,28 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
-        d = new Data();
-
     } // onCreate()
 
     public void addName(View view){
 
-        EditText n = view.findViewById(R.id.nameEditText);
-        String name = n.getText().toString();
-        d.addName(name);
+        Log.i(TAG, "inside MainAct. addName()");
+        EditText n;
+        String name;
+
+        n = view.findViewById(R.id.nameEditText);  // This blows things up
+                                    // n is a null object reference?
+        if(!n.getText().toString().equals("")) {
+            name = n.getText().toString();
+        }else{
+            name = "Hi";
+        }
+
+        Data.addName(name);
     }
 
     public void clearNames(View view){
-        d = new Data();
+        Log.i(TAG, "inside MainAct. clearName()");
+        Data.nameList.clear();
     }
 
 } // class MainActivity

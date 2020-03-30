@@ -1,21 +1,22 @@
 package com.ebookfrenzy.asyncrecycleview;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Data {
 
-    ArrayList<String> nameList;
+    public static final String TAG ="Data";
 
-    public Data(){ // constructor
+    public static ArrayList<String> nameList = new ArrayList<>();
 
-         nameList = new ArrayList<>();
-    }
-
-    public void addName(String n){
+    public static void addName(String n){
+        Log.i(TAG, "in addName()");
         nameList.add(n);
     }
 
-    public String getName(int i){
+    public static String getName(int i){
+        Log.i(TAG, "in getName()");
         return nameList.get(i);
     }
 

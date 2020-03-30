@@ -1,22 +1,16 @@
 package com.ebookfrenzy.asyncrecycleview;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 public class RecyclerAdapter extends RecyclerView.
         Adapter<RecyclerAdapter.ViewHolder> {
 
-    Data d2;
-    ArrayList<String> names = d2.nameList;
-
-    private String[] titles = {"Chapter One",
-            "Chapter Two",
-            "Chapter Three"};
+    public static final String TAG ="RecyclerAdapter";
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -30,13 +24,16 @@ public class RecyclerAdapter extends RecyclerView.
     @Override                            // i is an index into the data arrays
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-        int bound = getItemCount();
-        viewHolder.nameAndTime.setText(names.get(bound));
+        Log.i(TAG, "inside onBindViewHolder()");
+
+        viewHolder.nameAndTime.setText(Data.nameList.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return names.size();
+
+        Log.i(TAG, " inside HA HA getItemCount()");
+        return Data.nameList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,4 +44,5 @@ public class RecyclerAdapter extends RecyclerView.
             nameAndTime = itemView.findViewById(R.id.myTextView);
         }
     } // class ViewHolder
-}
+
+} // class RecycleAdapter
