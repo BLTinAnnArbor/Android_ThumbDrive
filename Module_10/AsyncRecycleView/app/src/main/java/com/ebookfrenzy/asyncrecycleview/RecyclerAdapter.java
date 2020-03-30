@@ -26,13 +26,15 @@ public class RecyclerAdapter extends RecyclerView.
 
         Log.i(TAG, "inside onBindViewHolder()");
 
-        viewHolder.nameAndTime.setText(Data.nameList.get(i));
+        //viewHolder.nameAndTime.setText(Data.nameList.get(i));
+        viewHolder.nameAndTime.setText("The name is "+ Data.nameList.get(i) +
+                ". The time it took was "+ Data.timeList.get(i) +" seconds.");
     }
 
     @Override
     public int getItemCount() {
 
-        Log.i(TAG, " inside HA HA getItemCount()");
+        Log.i(TAG, " inside  getItemCount()");
         return Data.nameList.size();
     }
 

@@ -4,21 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG ="MainActivity";
+    String name;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +44,63 @@ public class MainActivity extends AppCompatActivity {
     public void addName(View view){
 
         Log.i(TAG, "inside MainAct. addName()");
+
         EditText n;
-        String name;
 
-        n = view.findViewById(R.id.nameEditText);  // This blows things up
-                                    // n is a null object reference?
-        if(!n.getText().toString().equals("")) {
-            name = n.getText().toString();
-        }else{
-            name = "Hi";
-        }
+        n = findViewById(R.id.nameEditText);
+        name = n.getText().toString();
 
-        Data.addName(name);
+        AsyncTask task = new MyTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, name);
     }
 
     public void clearNames(View view){
         Log.i(TAG, "inside MainAct. clearName()");
         Data.nameList.clear();
+        Data.timeList.clear();
+        adapter.notifyDataSetChanged();
+    }
+
+    class MyTask extends  AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+            // a good place to update the user interface
+            //recyclerView.setAdapter(adapter);   // probably not here
+        }
+
+        @Override
+        protected String doInBackground(String... names) {
+
+            Random rand = new Random();
+            int pause = rand.nextInt(10);
+
+            try {
+                Thread.sleep(pause*1000);
+            }
+            catch (Exception e) {
+                return(e.getLocalizedMessage());
+            }
+            Data.addName(name);
+            Data.addTime(pause);
+
+            // Sending names to onProgressUpdate()
+            publishProgress(names);
+
+        return "On post execute was now called";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+
+            // what to do here?  output names?
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            adapter.notifyDataSetChanged();
+        }
     }
 
 } // class MainActivity
