@@ -35,6 +35,7 @@ public class RecyclerAdapter extends RecyclerView.
     public int getItemCount() {
 
         Log.i(TAG, " inside  getItemCount()");
+
         return Data.nameList.size();
     }
 

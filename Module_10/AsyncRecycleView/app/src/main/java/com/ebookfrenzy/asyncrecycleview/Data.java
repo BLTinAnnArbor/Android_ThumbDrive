@@ -12,7 +12,9 @@ public class Data {
     public static ArrayList<Integer> timeList = new ArrayList<>();
 
     public static void addName(String n){
+
         Log.i(TAG, "in addName()");
+        
         nameList.add(n);
     }
 

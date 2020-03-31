@@ -16,6 +16,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG ="MainActivity";
+
     String name;
 
     RecyclerView recyclerView;
@@ -27,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Log.i(TAG, "inside  onCreate()");
-        Data.nameList.clear();
-        Log.i(TAG, "just did Data.nameList.clear() inside onCreate()");
+
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void clearNames(View view){
         Log.i(TAG, "inside MainAct. clearName()");
+
         Data.nameList.clear();
         Data.timeList.clear();
+
         adapter.notifyDataSetChanged();
     }
 
@@ -66,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
 
             // a good place to update the user interface
-            //recyclerView.setAdapter(adapter);   // probably not here
         }
 
         @Override
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(String... values) {
 
-            // what to do here?  output names?
         }
 
         @Override
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
             adapter.notifyDataSetChanged();
         }
-    }
+
+    } // class MyTask extends AsyncTask
 
 } // class MainActivity
