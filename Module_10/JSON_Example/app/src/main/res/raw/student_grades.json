@@ -1,0 +1,24 @@
+{
+	"student-grades": {
+		"name": "Woody Woodpecker",
+		"full-time": true,
+		"courses": [
+			{
+				"name": "Android", 
+				"grade": "A"
+			},
+			{
+				"name": "English", 
+				"grade": "B+"
+			},
+			{
+				"name": "Math", 
+				"grade": "B"
+			},
+			{
+				"name": "Gym", 
+				"grade": "Pass"
+			}
+		]
+	}
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">JSON_Example</string>
+    <string name="load_grades">Load Grades</string>
+    <string name="student_info">Student Info...</string>
+</resources>
