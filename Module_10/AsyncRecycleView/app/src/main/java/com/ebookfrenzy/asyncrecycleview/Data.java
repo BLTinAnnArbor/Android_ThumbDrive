@@ -14,7 +14,7 @@ public class Data {
     public static void addName(String n){
 
         Log.i(TAG, "in addName()");
-        
+
         nameList.add(n);
     }
 

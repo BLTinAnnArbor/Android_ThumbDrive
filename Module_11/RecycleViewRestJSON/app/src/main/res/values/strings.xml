@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RecycleViewRestJSON</string>
+    <string name="_1313_mockingbird_ln_ann_arbor_mi_48104">1313 Mockingbird Ln, Ann Arbor, MI 48104</string>
+    <string name="_1">1</string>
+    <string name="_21">21</string>
+    <string name="tbl101_wccnet_edu">tbl101@wccnet.edu</string>
+    <string name="blue">blue</string>
+    <string name="_734_555_1212">734 555-1212</string>
+    <string name="textview">TextView</string>
+    <string name="brian_tuovila">Brian Tuovila</string>
+    <string name="male_or_female">male or female</string>
+</resources>
