@@ -50,15 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "  I'm right before gson.fromJson() call!");
 
-                        Employees employees = gson.fromJson(response.toString(), Employees.class);
+                        Employees names = gson.fromJson(response.toString(), Employees.class);
 
-                        Log.i(TAG, " I'm right after gson.fromJson() call!");
+                        ArrayList<Employees> empList = names.getNames();
 
-                        ArrayList<Employees> empList = employees.getEmployees();
-
-                        //RecyclerViewAdapter adapter = new RecyclerViewAdapter(empList);
+                        // This below works also because RVA extends RecycleView.Adapter<>
+                        // RecyclerViewAdapter adapter = new RecyclerViewAdapter(empList);
                         adapter = new RecyclerViewAdapter(empList);
 
                         recyclerView.setAdapter(adapter);

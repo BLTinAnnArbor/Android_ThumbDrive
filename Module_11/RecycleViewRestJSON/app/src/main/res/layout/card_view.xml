@@ -22,7 +22,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/male_female_image"
+            android:id="@+id/gender_image"
             android:layout_width="69dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
@@ -43,7 +43,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/count_number"
-            app:layout_constraintStart_toEndOf="@+id/male_female_image"
+            app:layout_constraintStart_toEndOf="@+id/gender_image"
             app:layout_constraintTop_toTopOf="@+id/count_number" />
 
         <TextView
@@ -66,7 +66,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/_1313_mockingbird_ln_ann_arbor_mi_48104"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/male_female_image" />
+            app:layout_constraintTop_toBottomOf="@+id/gender_image" />
 
         <TextView
             android:id="@+id/age"

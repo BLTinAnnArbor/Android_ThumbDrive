@@ -15,13 +15,11 @@ public class Employees {
     private String phone;
     private String address;
 
-    private ArrayList<Employees> employees;
+    private ArrayList<Employees> names;
 
-    public ArrayList<Employees> getEmployees(){
-
-        return employees;
+    public ArrayList<Employees> getNames(){
+        return names;
     }
-
 
     public String getAge() {
         return age;
