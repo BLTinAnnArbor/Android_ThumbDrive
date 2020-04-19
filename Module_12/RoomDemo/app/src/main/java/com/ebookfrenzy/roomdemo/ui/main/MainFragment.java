@@ -10,34 +10,50 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ebookfrenzy.roomdemo.MainActivity;
 import com.ebookfrenzy.roomdemo.R;
 import android.widget.EditText;
 
 import com.ebookfrenzy.roomdemo.Contact;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.lifecycle.Observer;
 import java.util.List;
 
 public class MainFragment extends Fragment {
+    
+    private static String TAG = "MainFragment";
 
     private MainViewModel mViewModel;
-    private ContactListAdapter adapter;  // an int
+    private ContactListAdapter adapter;
 
     private EditText name;
     private EditText phone;
+    private ImageView trashCan;  // Probably not necessary
 
+    //MainActivity ma = MainActivity.newInstance();
+
+    // Line below is called to replace container of main activity or something similar.
+    // It also enables the instance mf in MainActivity to access methods in this fragment.
     public static MainFragment newInstance() {
+        // to keep method from collapsing
         return new MainFragment();
     }
+
+    // Code Below will keep closing the app.
+    //MainActivity ma = MainActivity.newInstance(); // a static method call
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.main_fragment, container, false);
     }
 
@@ -54,6 +70,33 @@ public class MainFragment extends Fragment {
         observerSetup();
         recyclerSetup();
 
+    } // onActivityCreated()
+
+
+    public void showAllContacts(){
+
+    }
+
+    public void addContact(){
+
+        String nm = name.getText().toString();
+        String ph = phone.getText().toString();
+
+        Log.i(TAG, "addContact: before if");
+
+        if (!nm.equals("") && !ph.equals("")) {
+            Contact contact = new Contact(nm, ph);
+            mViewModel.insertContact(contact);
+            clearFields();
+        } else {
+            name.setText("Incomplete information");
+        }
+
+    }
+
+
+    public void findContact(){
+        mViewModel.findContact(name.getText().toString());
     }
 
     private void listenerSetup() {
@@ -89,6 +132,7 @@ public class MainFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //ma.showToast("'Hi there' from Delete Btn.");
                 mViewModel.deleteProduct(name.getText().toString());
                 clearFields();
             }

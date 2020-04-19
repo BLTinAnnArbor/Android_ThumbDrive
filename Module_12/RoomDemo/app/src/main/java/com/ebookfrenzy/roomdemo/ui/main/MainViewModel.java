@@ -9,7 +9,6 @@ import com.ebookfrenzy.roomdemo.Contact;
 import com.ebookfrenzy.roomdemo.ContactRepository;
 import java.util.List;
 
-
 public class MainViewModel extends AndroidViewModel {
 
     private ContactRepository repository;

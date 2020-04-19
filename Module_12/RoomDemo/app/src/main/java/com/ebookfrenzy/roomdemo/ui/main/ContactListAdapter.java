@@ -17,21 +17,30 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private int contactItemLayout;
     private List<Contact> contactList;
 
-  //CODE BELOW IS FROM BOOK EXAMPLE
+  //CODE BELOW IS FROM BOOK EXAMPLE- I don't completely get this yet.
     public ContactListAdapter(int layoutId) { // Constructor
         contactItemLayout = layoutId;  // an int
     }
 
-/*
+/*   // This does not work.
     public ContactListAdapter(List<Contact> contacts) { // Constructor
         contactList = contacts;  // a list
     }
-
  */
 
     public void setContactList(List<Contact> contacts) {
         contactList = contacts;
         notifyDataSetChanged();
+    }
+
+    public List<Contact> getContactList(){ // List<ContactList> ??
+        return contactList;
+    }
+
+    public void sortContactList(List<Contact> contacts){
+        // sort here using Collections.sort()
+        // might be public List<Contact> sortedContacts(...)
+        // notifyDataSetChanged();
     }
 
     @Override
@@ -42,7 +51,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(
-                //parent.getContext()).inflate(contactItemLayout, parent, false);
                  parent.getContext()).inflate(R.layout.card_layout, parent, false);
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
@@ -58,7 +66,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
         Contact contact = contactList.get(listPosition);
 
-        holder.can.setImageResource(R.drawable.ic_launcher_background);
+        holder.can.setImageResource(R.drawable.dark_red_can);
         holder.name.setText(contact.getName());
         holder.phone.setText((contact.getPhone()));
     }
@@ -72,7 +80,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
     }
 */
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    //static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView can;
         TextView name;
         TextView phone;
@@ -84,6 +93,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             name = itemView.findViewById(R.id.name);
             phone = itemView.findViewById(R.id.phone);
         }
-    } // static class ViewHolder- NOTE a STATIC class here.
+    } // static class ViewHolder- NOTE a STATIC class here. Change to non static.
 
 } // class ContactListAdapter

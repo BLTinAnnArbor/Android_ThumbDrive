@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">RoomDemo</string>
     <string name="trash_can">trash can</string>
+    <string name="show_all_contacts">Show All Contacts</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="find_contact">Find Contact</string>
+    <string name="sort_contacts_a_z">Sort Contacts A-Z</string>
+    <string name="sort_contacts_z_a">Sort Contacts Z-A</string>
+    <string name="this_is_a_custom_toast">This is a custom Toast.</string>
+    <string name="sad_face">sad face</string>
 </resources>
