@@ -37,7 +37,7 @@ public class MainFragment extends Fragment {
     private EditText phone;
     private ImageView trashCan;  // Probably not necessary
 
-    //MainActivity ma = MainActivity.newInstance();
+
 
     // Line below is called to replace container of main activity or something similar.
     // It also enables the instance mf in MainActivity to access methods in this fragment.
@@ -45,9 +45,6 @@ public class MainFragment extends Fragment {
         // to keep method from collapsing
         return new MainFragment();
     }
-
-    // Code Below will keep closing the app.
-    //MainActivity ma = MainActivity.newInstance(); // a static method call
 
     @Nullable
     @Override
@@ -132,7 +129,6 @@ public class MainFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ma.showToast("'Hi there' from Delete Btn.");
                 mViewModel.deleteProduct(name.getText().toString());
                 clearFields();
             }
