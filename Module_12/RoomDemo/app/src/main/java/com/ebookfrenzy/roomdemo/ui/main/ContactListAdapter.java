@@ -10,6 +10,8 @@ import com.ebookfrenzy.roomdemo.Contact;
 import com.ebookfrenzy.roomdemo.R;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ViewHolder> {
@@ -27,22 +29,29 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         contactList = contacts;  // a list
     }
  */
+    public void findContact(String n){
+        // ??
+    }
 
     public void setContactList(List<Contact> contacts) {
         contactList = contacts;
         notifyDataSetChanged();
     }
 
-    public List<Contact> getContactList(){ // List<ContactList> ??
+    public List<Contact> getContactList(){
         return contactList;
     }
 
-    public void sortContactList(List<Contact> contacts){
-        // sort here using Collections.sort()
-        // might be public List<Contact> sortedContacts(...)
-        // notifyDataSetChanged();
+    public void sortContactList(){
+        Collections.sort(getContactList(), Contact.NameComparator);
+        notifyDataSetChanged();
     }
 
+    public void sortContactListDes(){
+        Collections.sort(getContactList(), Contact.NameComparatorReverse);
+        notifyDataSetChanged();
+    }
+//***************************
     @Override
     public int getItemCount() {
         return contactList == null ? 0 : contactList.size();

@@ -2,6 +2,7 @@ package com.ebookfrenzy.roomdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, mf)
                     .commitNow();
         }
     }
@@ -39,22 +41,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
+
         switch (item.getItemId()){
+
             case R.id.show_contacts:
                 mf.showAllContacts();
                 return true;
+
             case R.id.add_contact:
                 mf.addContact();
                 return true;
+
             case R.id.find_contact:
-                showToast("Hi there! from find_contact in overflow menu.");
-                //mf.findContact();
+                mf.findContact();
                 return true;
+
+            case R.id.sort_az:
+                mf.sortContactsAsc();
+                return true;
+
+            case R.id.sort_za:
+                mf.sortContactsDes();
+                return true;
+
+            case R.id.delete_contact:
+                mf.deleteContact();
+                return true;
+
             default: return super.onOptionsItemSelected(item);
         }
     }
 
     public void showToast(String message){
+
         LayoutInflater inflater = getLayoutInflater();     // Below, a required cast to ViewGroup.
         View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup)findViewById(R.id.toast_root));
 
@@ -69,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
-
     }
 
 } // class MainActivity
