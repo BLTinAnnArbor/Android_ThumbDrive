@@ -74,13 +74,17 @@ public class MainFragment extends Fragment {
     } // onActivityCreated()
 
     public void findContact(){
-        mViewModel.findContact(name.getText().toString()); // a void method, I want the list
-        //adapter.setContactList(List<Contact> of results from above query);
+        mViewModel.findContact(name.getText().toString());
     }
 
-
     public void showAllContacts(){
-        adapter.getContactList();
+
+        mViewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
+            @Override
+            public void onChanged(@Nullable final List<Contact> contacts) {
+                adapter.setContactList(contacts);
+            }
+        });
     }
 
     public void sortContactsAsc(){
@@ -127,9 +131,8 @@ public class MainFragment extends Fragment {
     private void recyclerSetup() {
 
         RecyclerView recyclerView;
-
-        //adapter = new ContactListAdapter(R.layout.contact_list_item);  // book example
         adapter = new ContactListAdapter(R.layout.card_layout); // (R.layout.card_layout) is an int.
+
         recyclerView = getView().findViewById(R.id.contact_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -155,6 +158,17 @@ public class MainFragment extends Fragment {
                     public void onChanged(@Nullable final List<Contact> contacts) {
 
                         if (contacts.size() > 0) {
+                            adapter.setContactList(contacts);
+                        }
+                    }
+                });
+    /*
+        mViewModel.getSearchResults().observe(this,
+                new Observer<List<Contact>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<Contact> contacts) {
+
+                        if (contacts.size() > 0) {
                             name.setText(contacts.get(0).getName());
                             phone.setText(contacts.get(0).getPhone());
                         } else {
@@ -162,7 +176,10 @@ public class MainFragment extends Fragment {
                         }
                     }
                 });
-    }
+
+     */
+
+    } // observerSetup()
 //******************************************************************************
     private void listenerSetup() {
 

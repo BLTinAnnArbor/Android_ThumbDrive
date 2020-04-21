@@ -10,7 +10,6 @@ import com.ebookfrenzy.roomdemo.Contact;
 import com.ebookfrenzy.roomdemo.R;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,12 +18,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private int contactItemLayout;
     private List<Contact> contactList;
 
-  //CODE BELOW IS FROM BOOK EXAMPLE- I don't completely get this yet.
     public ContactListAdapter(int layoutId) { // Constructor
         contactItemLayout = layoutId;  // an int
     }
-
-
 
     public void setContactList(List<Contact> contacts) {
         contactList = contacts;
@@ -67,8 +63,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.name.setText(contact.getName());
         holder.phone.setText((contact.getPhone()));
     }
-
-
+    
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView can;
         TextView name;

@@ -100,5 +100,4 @@ public class ContactRepository {
         }
     }
 
-
-}
+} // class ContactRepository
