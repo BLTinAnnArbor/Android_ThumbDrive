@@ -24,14 +24,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         contactItemLayout = layoutId;  // an int
     }
 
-/*   // This does not work.
-    public ContactListAdapter(List<Contact> contacts) { // Constructor
-        contactList = contacts;  // a list
-    }
- */
-    public void findContact(String n){
-        // ??
-    }
+
 
     public void setContactList(List<Contact> contacts) {
         contactList = contacts;
@@ -64,15 +57,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
     }
-/* CODE BELOW IS FROM BOOK EXAMPLE
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
-        TextView item = holder.item;
-        item.setText(contactList.get(listPosition).getName());
-    }
-*/
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
+
         Contact contact = contactList.get(listPosition);
 
         holder.can.setImageResource(R.drawable.dark_red_can);
@@ -80,16 +68,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.phone.setText((contact.getPhone()));
     }
 
-/* BELOW IS FROM BOOK EXAMPLE
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView item;
-        ViewHolder(View itemView) {
-            super(itemView);
-            item = itemView.findViewById(R.id.card_view);
-        }
-    }
-*/
-    //static class ViewHolder extends RecyclerView.ViewHolder {
+
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView can;
         TextView name;
@@ -102,6 +81,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             name = itemView.findViewById(R.id.name);
             phone = itemView.findViewById(R.id.phone);
         }
-    } // static class ViewHolder- NOTE a STATIC class here. Change to non static.
+    }
 
 } // class ContactListAdapter

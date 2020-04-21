@@ -73,6 +73,11 @@ public class MainFragment extends Fragment {
 
     } // onActivityCreated()
 
+    public void findContact(){
+        mViewModel.findContact(name.getText().toString()); // a void method, I want the list
+        //adapter.setContactList(List<Contact> of results from above query);
+    }
+
 
     public void showAllContacts(){
         adapter.getContactList();
@@ -116,10 +121,6 @@ public class MainFragment extends Fragment {
                     "if you want to delete a contact.");
             name.requestFocus();
         }
-    }
-
-    public void findContact(){
-       // ???
     }
 
 //*************************************8

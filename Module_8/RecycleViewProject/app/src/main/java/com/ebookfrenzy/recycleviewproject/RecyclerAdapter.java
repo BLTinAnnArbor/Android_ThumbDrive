@@ -51,15 +51,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         Random rand = new Random();
         int bound = getItemCount();
-
+/*
         viewHolder.itemTitle.setText(titles.get(rand.nextInt(bound)));
         viewHolder.itemDetail.setText(details.get(rand.nextInt(bound)));
         viewHolder.itemImage.setImageResource(images.get(rand.nextInt(bound)));
+
+ */
+
+        viewHolder.itemTitle.setText(titles.get(2));
+        viewHolder.itemDetail.setText(details.get(2));
+        viewHolder.itemImage.setImageResource(images.get(2));
     }
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        //return titles.size();
+        return 2;
     }
 
 }
