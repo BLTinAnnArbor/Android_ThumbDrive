@@ -15,12 +15,15 @@ public class MainViewModel extends AndroidViewModel {
     private LiveData<List<Contact>> allContacts;
     private MutableLiveData<List<Contact>> searchResults;
 
+
+
     public MainViewModel (Application application) {
         super(application);
         repository = new ContactRepository(application);
         allContacts = repository.getAllContacts();
         searchResults = repository.getSearchResults();
     }
+
 
     MutableLiveData<List<Contact>> getSearchResults() {
         return searchResults;

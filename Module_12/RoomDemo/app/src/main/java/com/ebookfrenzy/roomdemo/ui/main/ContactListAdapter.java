@@ -1,7 +1,5 @@
 package com.ebookfrenzy.roomdemo.ui.main;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ebookfrenzy.roomdemo.Contact;
-import com.ebookfrenzy.roomdemo.MainActivity;
 import com.ebookfrenzy.roomdemo.R;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Comment;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,29 +21,27 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private int contactItemLayout;
     private List<Contact> contactList;
 
-    Context context;
-    //ContactClickListener contactClickListener;
+    private  MyAdapterListener myAdapterListener;  // Global scope-  is what the author commented
 
-    public ContactListAdapter(int layoutId) { // Constructor
-        contactItemLayout = layoutId;  // an int
-    }
-
-
- /*       // see Chrome bookmark
-    public ContactListAdapter(Context context,   // Constructor
-                              int layoutId, ContactClickListener contactClickListener) {
-    this.context = context;
-    contactItemLayout = layoutId;  // an int
-    this.contactClickListener = contactClickListener;
-    }
-
-    public interface ContactClickListener {
-        void onItemClicked(Contact itemClicked);
+   /*
+    public ContactListAdapter(int layoutId){
+        contactItemLayout = layoutId;
     }
 
   */
 
+    public ContactListAdapter(int layoutId, MyAdapterListener myAdapterListener) { // Constructor
+        this.myAdapterListener = myAdapterListener;
+        contactItemLayout = layoutId;  // an int
+    }
 
+
+    public interface MyAdapterListener {
+
+        void onContainerClick(View view, int position);
+    }
+
+//************************************
     public void setContactList(List<Contact> contacts) {
         contactList = contacts;
         notifyDataSetChanged();
@@ -91,8 +84,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.phone.setText((contact.getPhone()));
     }
 
-     //class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     class ViewHolder extends RecyclerView.ViewHolder{
+
         TextView name;
         TextView phone;
         ImageView can;
@@ -103,29 +96,19 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
             name = itemView.findViewById(R.id.name);
             phone = itemView.findViewById(R.id.phone);
-            can = (ImageView)itemView.findViewById(R.id.can_image);
+            can = itemView.findViewById(R.id.can_image);
 
             can.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Log.i(TAG, "onClick: name = "+ name.getText().toString());
-                    mainViewModel.deleteContact(name.getText().toString());
+                public void onClick(View view) {
+
+                    myAdapterListener.onContainerClick(can, getAdapterPosition());
+
+                    Log.i(TAG, "getAdapterPosition() = "+ getAdapterPosition());
+
                 }
             });
         }
-        /*
-        @Override
-         public void onClick(View v){
-            if(contactList != null){
-                contactClickListener.onItemClicked(contactList.get(getLayoutPosition()));
-            }
-            if(v.getId() == R.id.can_image){
-                Log.i(TAG, "v.getId() ="+ v.getId());
-
-            }
-        }
-
-         */
 
     } // class ViewHolder
 

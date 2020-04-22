@@ -45,8 +45,6 @@ public class MainFragment extends Fragment {
     private EditText phone;
     private ImageView trashCan;  // Probably not necessary
 
-    Context context;
-
     // Line below is called to replace container of main activity or something similar.
     // It also enables the instance mf in MainActivity to access methods in this fragment.
     public static MainFragment newInstance() {
@@ -148,8 +146,17 @@ public class MainFragment extends Fragment {
 
         RecyclerView recyclerView;
 
-        adapter = new ContactListAdapter(R.layout.card_layout); // (R.layout.card_layout) is an int.
-        //adapter = new ContactListAdapter(context.getApplicationContext(), R.layout.card_layout, this);
+        //adapter = new ContactListAdapter(R.layout.card_layout); // (R.layout.card_layout) is an int.
+
+        adapter = new ContactListAdapter(R.layout.card_layout, new ContactListAdapter.MyAdapterListener() {
+            @Override
+            public void onContainerClick(View v, int position) {
+
+                Log.i(TAG, "iconTextViewOnClick at position "+ position);
+
+                //mViewModel.deleteContact();  I have the position, now I need the name here
+            }
+        });
 
         recyclerView = getView().findViewById(R.id.contact_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
