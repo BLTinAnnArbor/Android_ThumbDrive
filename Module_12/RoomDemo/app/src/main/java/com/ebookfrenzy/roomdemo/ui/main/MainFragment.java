@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import com.ebookfrenzy.roomdemo.MainActivity;
 import com.ebookfrenzy.roomdemo.R;
+
+import android.widget.Adapter;
 import android.widget.EditText;
 
 import com.ebookfrenzy.roomdemo.Contact;
@@ -32,6 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainFragment extends Fragment {
+//public class MainFragment extends Fragment implements ContactListAdapter.ContactClickListener{
     
     private static String TAG = "MainFragment";
 
@@ -42,7 +45,7 @@ public class MainFragment extends Fragment {
     private EditText phone;
     private ImageView trashCan;  // Probably not necessary
 
-
+    Context context;
 
     // Line below is called to replace container of main activity or something similar.
     // It also enables the instance mf in MainActivity to access methods in this fragment.
@@ -59,6 +62,7 @@ public class MainFragment extends Fragment {
         return inflater.inflate(R.layout.main_fragment, container, false);
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -67,14 +71,23 @@ public class MainFragment extends Fragment {
         name = getView().findViewById(R.id.name);
         phone = getView().findViewById(R.id.phone);
 
-        listenerSetup();
         observerSetup();
         recyclerSetup();
 
     } // onActivityCreated()
 
+
     public void findContact(){
-        mViewModel.findContact(name.getText().toString());
+        String nm = name.getText().toString();
+
+        if (!nm.equals("")) {
+            mViewModel.searchContact(nm);
+            clearFields();
+        } else {
+            ((MainActivity) getActivity()).showToast("You must enter a name " +
+                    " or partial name if you want to search for a contact.");
+            name.requestFocus();
+        }
     }
 
     public void showAllContacts(){
@@ -96,7 +109,6 @@ public class MainFragment extends Fragment {
     }
 
     public void addContact(){
-
         String nm = name.getText().toString();
         String ph = phone.getText().toString();
 
@@ -113,11 +125,9 @@ public class MainFragment extends Fragment {
     }
 
     public void deleteContact(){
-
         String nm = name.getText().toString();
-        String ph = phone.getText().toString();
 
-        if (!nm.equals("")) { // If nm is not a record, nothing bad happens.
+        if (!nm.equals("")) {
             mViewModel.deleteContact(nm);
             clearFields();
         } else {
@@ -127,21 +137,25 @@ public class MainFragment extends Fragment {
         }
     }
 
-//*************************************8
+    private void clearFields() {
+        name.setText("");
+        phone.setText("");
+        name.requestFocus();
+    }
+
+//*************************************
     private void recyclerSetup() {
 
         RecyclerView recyclerView;
+
         adapter = new ContactListAdapter(R.layout.card_layout); // (R.layout.card_layout) is an int.
+        //adapter = new ContactListAdapter(context.getApplicationContext(), R.layout.card_layout, this);
 
         recyclerView = getView().findViewById(R.id.contact_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }
 
-    private void clearFields() {
-        name.setText("");
-        phone.setText("");
-    }
 
     private void observerSetup() {
 
@@ -160,64 +174,13 @@ public class MainFragment extends Fragment {
                         if (contacts.size() > 0) {
                             adapter.setContactList(contacts);
                         }
-                    }
-                });
-    /*
-        mViewModel.getSearchResults().observe(this,
-                new Observer<List<Contact>>() {
-                    @Override
-                    public void onChanged(@Nullable final List<Contact> contacts) {
-
-                        if (contacts.size() > 0) {
-                            name.setText(contacts.get(0).getName());
-                            phone.setText(contacts.get(0).getPhone());
-                        } else {
-                            name.setText("No Match");
+                        else{
+                            ((MainActivity) getActivity()).showToast("Nothing found in the database.");
+                            name.requestFocus();
                         }
                     }
                 });
 
-     */
-
     } // observerSetup()
-//******************************************************************************
-    private void listenerSetup() {
-
-        Button addButton = getView().findViewById(R.id.addButton);
-        Button findButton = getView().findViewById(R.id.findButton);
-        Button deleteButton = getView().findViewById(R.id.deleteButton);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String nm = name.getText().toString();
-                String ph = phone.getText().toString();
-
-                if (!nm.equals("") && !ph.equals("")) {
-                    Contact contact = new Contact(nm, ph);
-                    mViewModel.insertContact(contact);
-                    clearFields();
-                } else {
-                    name.setText("Incomplete information");
-                }
-            }
-        });
-
-        findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.findContact(name.getText().toString());
-            }
-        });
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.deleteContact(name.getText().toString());
-                clearFields();
-            }
-        });
-    }
 
 } // class MainFragment

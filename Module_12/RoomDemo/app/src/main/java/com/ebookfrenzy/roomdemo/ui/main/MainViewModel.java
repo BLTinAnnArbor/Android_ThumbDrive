@@ -38,6 +38,10 @@ public class MainViewModel extends AndroidViewModel {
         repository.findContact(name);
     }
 
+    public void searchContact(String name) {
+        repository.searchContact(name);
+    }
+
     public void deleteContact(String name) {
         repository.deleteContact(name);
     }

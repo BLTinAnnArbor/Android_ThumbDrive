@@ -9,4 +9,6 @@
     <string name="this_is_a_custom_toast">This is a custom Toast.</string>
     <string name="sad_face">sad face</string>
     <string name="delete_contact">Delete Contact</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_phone">Enter Phone</string>
 </resources>

@@ -39,18 +39,43 @@ public class ContactRepository {
         task.execute(name);
     }
 
-    public void findContact(String name) {
+    public void findContact(String name) {  // Not used
         QueryAsyncTask task = new QueryAsyncTask(contactDao);
         task.delegate = this;
         task.execute(name);
+    }
+    public void searchContact(String name) {  // Used this instead
+        SearchAsyncTask task = new SearchAsyncTask(contactDao);
+        task.delegate = this;
+        task.execute(name);
+    }
+    private static class SearchAsyncTask extends  // used
+            AsyncTask<String, Void, List<Contact>> {
+
+        private ContactDao asyncTaskDao;
+        private ContactRepository delegate = null;
+
+        SearchAsyncTask(ContactDao dao) {
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<Contact> doInBackground(final String... params) {
+            return asyncTaskDao.searchContact(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Contact> result) {
+            delegate.asyncFinished(result);
+        }
     }
 
     private void asyncFinished(List<Contact> results) {
         searchResults.setValue(results);
     }
 
-    private static class QueryAsyncTask extends
-            AsyncTask<String, Void, List<Contact>> {
+    private static class QueryAsyncTask extends   // not used
+            android.os.AsyncTask<String, Void, List<Contact>> {
 
         private ContactDao asyncTaskDao;
         private ContactRepository delegate = null;
@@ -70,7 +95,8 @@ public class ContactRepository {
         }
     }
 
-    private static class InsertAsyncTask extends AsyncTask<Contact, Void, Void> {
+    //***************************
+    private static class InsertAsyncTask extends android.os.AsyncTask<Contact, Void, Void> {
 
         private ContactDao asyncTaskDao;
 
@@ -85,7 +111,7 @@ public class ContactRepository {
         }
     }
 
-    private static class DeleteAsyncTask extends AsyncTask<String, Void, Void> {
+    private static class DeleteAsyncTask extends android.os.AsyncTask<String, Void, Void> {
 
         private ContactDao asyncTaskDao;
 

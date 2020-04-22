@@ -16,6 +16,9 @@ public interface ContactDao {
     @Query("SELECT * FROM contacts WHERE contactName = :name")
     List<Contact> findContact(String name);
 
+    @Query("SELECT * FROM contacts WHERE contactName LIKE '%' || :name || '%' ")
+    List<Contact> searchContact(String name);
+
     @Query("DELETE FROM contacts WHERE contactName = :name")
     void deleteContact(String name);
 

@@ -51,14 +51,15 @@ public class Contact  {
 
         @Override
         public int compare(Contact c1, Contact c2) {
-            return c1.getName().compareTo(c2.getName());
+            return c1.getName().toLowerCase().compareTo(c2.getName().toLowerCase());
         }
     };
     public static Comparator<Contact> NameComparatorReverse = new Comparator<Contact>() {
 
         @Override
         public int compare(Contact c1, Contact c2) {
-            return -1*c1.getName().compareTo(c2.getName());
+
+            return -1*c1.getName().toLowerCase().compareTo(c2.getName().toLowerCase());
         }
     };
 
