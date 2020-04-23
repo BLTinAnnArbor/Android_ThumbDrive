@@ -34,7 +34,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainFragment extends Fragment {
-//public class MainFragment extends Fragment implements ContactListAdapter.ContactClickListener{
     
     private static String TAG = "MainFragment";
 
@@ -43,7 +42,6 @@ public class MainFragment extends Fragment {
 
     private EditText name;
     private EditText phone;
-    private ImageView trashCan;  // Probably not necessary
 
     // Line below is called to replace container of main activity or something similar.
     // It also enables the instance mf in MainActivity to access methods in this fragment.
@@ -96,14 +94,18 @@ public class MainFragment extends Fragment {
                 adapter.setContactList(contacts);
             }
         });
+
     }
 
-    public void sortContactsAsc(){
-        adapter.sortContactList();
+    //public void sortContactList()
+     public void sortContactList(){
+     Collections.sort(adapter.getContactList(), Contact.NameComparator);
+     adapter.notifyDataSetChanged();
     }
 
-    public void sortContactsDes(){
-        adapter.sortContactListDes();
+    public void sortContactListDes(){
+        Collections.sort(adapter.getContactList(), Contact.NameComparatorReverse);
+        adapter.notifyDataSetChanged();
     }
 
     public void addContact(){
@@ -122,19 +124,6 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public void deleteContact(){
-        String nm = name.getText().toString();
-
-        if (!nm.equals("")) {
-            mViewModel.deleteContact(nm);
-            clearFields();
-        } else {
-            ((MainActivity) getActivity()).showToast("You must enter at least a name " +
-                    "if you want to delete a contact.");
-            name.requestFocus();
-        }
-    }
-
     private void clearFields() {
         name.setText("");
         phone.setText("");
@@ -146,15 +135,14 @@ public class MainFragment extends Fragment {
 
         RecyclerView recyclerView;
 
-        //adapter = new ContactListAdapter(R.layout.card_layout); // (R.layout.card_layout) is an int.
-
         adapter = new ContactListAdapter(R.layout.card_layout, new ContactListAdapter.MyAdapterListener() {
             @Override
-            public void onContainerClick(View v, int position) {
+            public void onContainerClick(View v, Contact contact) {
 
-                Log.i(TAG, "iconTextViewOnClick at position "+ position);
+                String nm = contact.getName();
+                Log.i(TAG, "nm = "+ nm);
 
-                //mViewModel.deleteContact();  I have the position, now I need the name here
+                mViewModel.deleteContact(nm);
             }
         });
 
@@ -162,7 +150,6 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }
-
 
     private void observerSetup() {
 

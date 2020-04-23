@@ -63,4 +63,4 @@ public class Contact  {
         }
     };
 
-}
+} // class Contact

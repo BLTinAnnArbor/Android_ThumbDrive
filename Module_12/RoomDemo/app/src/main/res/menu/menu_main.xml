@@ -18,7 +18,4 @@
     <item
         android:id="@+id/sort_za"
         android:title="@string/sort_contacts_z_a" />
-    <item
-        android:id="@+id/delete_contact"
-        android:title="@string/delete_contact" />
 </menu>

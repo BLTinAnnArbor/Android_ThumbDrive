@@ -23,22 +23,14 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     private  MyAdapterListener myAdapterListener;  // Global scope-  is what the author commented
 
-   /*
-    public ContactListAdapter(int layoutId){
-        contactItemLayout = layoutId;
-    }
-
-  */
-
     public ContactListAdapter(int layoutId, MyAdapterListener myAdapterListener) { // Constructor
         this.myAdapterListener = myAdapterListener;
         contactItemLayout = layoutId;  // an int
     }
 
-
     public interface MyAdapterListener {
 
-        void onContainerClick(View view, int position);
+        void onContainerClick(View view, Contact contact);
     }
 
 //************************************
@@ -50,7 +42,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public List<Contact> getContactList(){
         return contactList;
     }
-
+/*
     public void sortContactList(){
         Collections.sort(getContactList(), Contact.NameComparator);
         notifyDataSetChanged();
@@ -60,6 +52,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         Collections.sort(getContactList(), Contact.NameComparatorReverse);
         notifyDataSetChanged();
     }
+
+ */
 //***************************
     @Override
     public int getItemCount() {
@@ -102,10 +96,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 @Override
                 public void onClick(View view) {
 
-                    myAdapterListener.onContainerClick(can, getAdapterPosition());
+                    myAdapterListener.onContainerClick(can, contactList.get(getAdapterPosition()));
+                    Contact tempContact = contactList.get(getAdapterPosition());
+                    String nm = tempContact.getName();
 
-                    Log.i(TAG, "getAdapterPosition() = "+ getAdapterPosition());
-
+                    Log.i(TAG, "nm = "+ nm);
                 }
             });
         }

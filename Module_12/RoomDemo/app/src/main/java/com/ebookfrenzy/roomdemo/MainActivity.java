@@ -56,15 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.sort_az:
-                mf.sortContactsAsc();
+                mf.sortContactList();
                 return true;
 
             case R.id.sort_za:
-                mf.sortContactsDes();
-                return true;
-
-            case R.id.delete_contact:
-                mf.deleteContact();
+                mf.sortContactListDes();
                 return true;
 
             default: return super.onOptionsItemSelected(item);
